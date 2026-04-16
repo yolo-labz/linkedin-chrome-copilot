@@ -1,0 +1,15 @@
+{
+  "timezone": "America/Recife",
+  "tz_label": "BRT (UTC-03:00)",
+  "deep_work_block": {
+    "enabled": true,
+    "start": "09:00",
+    "end": "12:00",
+    "days": ["mon", "tue", "wed", "thu", "fri"]
+  },
+  "meeting_windows": [
+    {"days": ["mon", "tue", "wed", "thu"], "start": "14:00", "end": "18:00"},
+    {"days": ["fri"], "start": "14:00", "end": "17:00"}
+  ],
+  "blocked_days": ["2026-04-19", "2026-04-20", "2026-05-01"]
+}
