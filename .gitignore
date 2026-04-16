@@ -1,0 +1,57 @@
+# --- Local operator state (NEVER commit) ---
+# Alias map resolves synthetic IDs to real contacts — lives in ~/.config
+# but belt-and-suspenders guard in case anyone symlinks it in.
+aliases.json
+config/secrets.*
+**/secrets/*
+.env
+.env.*
+
+# --- Generated CV artifacts ---
+# Tailored CV PDFs are per-application and often contain PII.
+*.pdf
+out/
+dist/
+build/
+
+# --- Save-state local overrides ---
+# Operators may keep a personal save-state outside the fixture dir.
+CLAUDE-SAVE-STATE-local.md
+save-state-local.md
+
+# --- macOS / editor cruft ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+*~
+
+# --- Node / JS tooling (commitlint, lefthook) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Test / coverage ---
+.coverage
+coverage/
+tests/tmp/
+tests/*.log
+
+# --- Pre-commit cache ---
+.pre-commit-cache/
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.iml
+
+# --- Shell history, logs ---
+*.log
+logs/

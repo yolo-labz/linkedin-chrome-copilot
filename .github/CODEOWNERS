@@ -1,0 +1,15 @@
+# Path-based ownership. Informational only — this is a solo-maintained plugin.
+# Pattern matches GitHub CODEOWNERS syntax; first match wins.
+
+# Default owner for everything in the repo
+*       @phsb5321
+
+# Release-engineering surface (CI, SBOMs, attestations) — extra care
+/.github/         @phsb5321
+/tools/           @phsb5321
+/plugin.json      @phsb5321
+/.claude-plugin/  @phsb5321
+
+# Security-sensitive
+/SECURITY.md          @phsb5321
+/tools/pii-scan.sh    @phsb5321

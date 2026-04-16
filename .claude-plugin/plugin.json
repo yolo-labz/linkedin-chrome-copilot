@@ -1,0 +1,25 @@
+{
+  "name": "linkedin-chrome-copilot",
+  "version": "0.1.0-alpha",
+  "description": "LinkedIn / job-search copilot for Claude Code. Persistent save-state, pipeline CRM, channel-aware drafts, Calendly booking, CV tailoring, profile sync. macOS Chrome automation delegated to claude-mac-chrome sibling plugin. No PII in committed artifacts — enforced by pii-scan CI gate.",
+  "author": {
+    "name": "Pedro Henrique Souza Balbino",
+    "url": "https://github.com/phsb5321"
+  },
+  "homepage": "https://github.com/yolo-labz/linkedin-chrome-copilot",
+  "repository": "https://github.com/yolo-labz/linkedin-chrome-copilot",
+  "license": "MIT",
+  "keywords": [
+    "linkedin",
+    "job-search",
+    "chrome",
+    "macos",
+    "claude-code",
+    "claude-code-plugin",
+    "pipeline-crm",
+    "clipboard-handoff",
+    "calendly",
+    "cv-tailoring"
+  ],
+  "requires_notes": "Requires claude-mac-chrome >= 1.1.1 installed as a sibling plugin. macOS 13+ only. See README Platform Support section."
+}
