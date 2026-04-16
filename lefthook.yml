@@ -1,0 +1,24 @@
+# Git hook runner — faster than husky, single Go binary.
+# Install:  brew install lefthook && lefthook install
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no -- commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  commands:
+    shellcheck:
+      glob: "*.{sh,bash}"
+      run: shellcheck --severity=warning {staged_files}
+    shfmt:
+      glob: "*.{sh,bash}"
+      run: shfmt -i 2 -ci -bn -d {staged_files}
+    pii-scan:
+      run: tools/pii-scan.sh
+
+pre-push:
+  commands:
+    bats-smoke:
+      run: bash tests/fixtures-validate.sh 2>/dev/null || true

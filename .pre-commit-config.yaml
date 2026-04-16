@@ -1,0 +1,67 @@
+---
+# Pre-commit enforces the hard rules from CONTRIBUTING.md.
+# Install:  brew install pre-commit && pre-commit install
+repos:
+  # --- Shell hygiene (CONTRIBUTING.md hard rule #3) ---
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: [--severity=warning]
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.10.0-2
+    hooks:
+      - id: shfmt
+        args: [-i, "2", -ci, -bn, -d]
+
+  # --- GitHub Actions hardening ---
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.7
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/woodruffw/zizmor-pre-commit
+    rev: v1.5.2
+    hooks:
+      - id: zizmor
+
+  # --- YAML / JSON sanity ---
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=200]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # --- Conventional commits ---
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, refactor, chore, docs, test]
+
+  # --- Local hooks ---
+  - repo: local
+    hooks:
+      # Hard rule #1 — no PII in committed files.
+      - id: pii-scan
+        name: pii-scan (no real contact data in fixtures)
+        entry: tools/pii-scan.sh
+        language: script
+        pass_filenames: false
+        stages: [pre-commit]
+
+      # Hard rule #5 — no raw AppleScript in this repo.
+      - id: no-raw-applescript
+        name: no raw AppleScript (use tools/chrome-shim.sh)
+        entry: bash -c 'grep -rEn "osascript|tell application \"Google Chrome\"" --include="*.sh" skills/ commands/ hooks/ 2>/dev/null && exit 1 || exit 0'
+        language: system
+        pass_filenames: false

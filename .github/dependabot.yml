@@ -1,0 +1,35 @@
+---
+version: 2
+updates:
+  # GitHub Actions — weekly. Preserves the `# vX.Y.Z` comment next to each
+  # SHA-pinned action so human reviewers can still see the logical version.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Recife
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    labels:
+      - dependencies
+      - github-actions
+
+  # npm — for commitlint + lefthook dev tooling only. Runtime has no npm deps.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Recife
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: chore
+      include: scope
+    labels:
+      - dependencies
+      - npm
