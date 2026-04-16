@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/yolo-labz/linkedin-chrome-copilot/schemas/contact.schema.json",
+  "title": "Contact",
+  "description": "Pipeline contact — alias only, no PII fields",
+  "type": "object",
+  "required": [
+    "alias",
+    "primary_channel",
+    "channels_seen",
+    "stage",
+    "last_touch_iso",
+    "next_action_owner",
+    "thread_refs",
+    "locale"
+  ],
+  "properties": {
+    "alias": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 3,
+      "maxLength": 40
+    },
+    "primary_channel": {
+      "type": "string",
+      "enum": ["linkedin", "email", "whatsapp", "ats"]
+    },
+    "channels_seen": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "enum": ["linkedin", "email", "whatsapp", "ats"] },
+      "uniqueItems": true
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "first-touch",
+        "screening",
+        "tech-interview",
+        "final",
+        "offer",
+        "closed-won",
+        "closed-lost",
+        "on-hold"
+      ]
+    },
+    "last_touch_iso": { "type": "string", "format": "date-time" },
+    "next_action_owner": {
+      "type": "string",
+      "enum": ["operator", "agent", "counterparty"]
+    },
+    "blocker": { "type": ["string", "null"] },
+    "thread_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" }
+    },
+    "locale": { "type": "string", "enum": ["pt-BR", "en-US"] },
+    "notes": { "type": "string", "maxLength": 2000 }
+  },
+  "additionalProperties": false
+}

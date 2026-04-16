@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/yolo-labz/linkedin-chrome-copilot/schemas/draft.schema.json",
+  "title": "Draft",
+  "type": "object",
+  "required": [
+    "id",
+    "thread_id",
+    "register",
+    "locale",
+    "body",
+    "clipboard_handoff",
+    "approval_state",
+    "created_iso"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "thread_id": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "register": {
+      "type": "string",
+      "enum": ["formal-email", "conversational-dm", "informal-wa"]
+    },
+    "locale": { "type": "string", "enum": ["pt-BR", "en-US"] },
+    "body": { "type": "string", "minLength": 1 },
+    "subject": { "type": ["string", "null"] },
+    "clipboard_handoff": { "type": "boolean" },
+    "approval_state": {
+      "type": "string",
+      "enum": ["pending", "approved", "sent", "unconfirmed", "aborted"]
+    },
+    "created_iso": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "register": { "const": "conversational-dm" } } },
+      "then": { "properties": { "body": { "maxLength": 400 } } }
+    },
+    {
+      "if": { "properties": { "register": { "const": "formal-email" } } },
+      "then": {
+        "required": ["subject"],
+        "properties": { "body": { "maxLength": 2000 }, "subject": { "type": "string", "minLength": 1 } }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

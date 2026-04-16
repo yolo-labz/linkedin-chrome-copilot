@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/yolo-labz/linkedin-chrome-copilot/schemas/pipeline-event.schema.json",
+  "title": "PipelineEvent",
+  "description": "Append-only ledger entry.",
+  "type": "object",
+  "required": ["id", "ts_iso", "action", "owner", "outcome"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "ts_iso": { "type": "string", "format": "date-time" },
+    "contact_alias": { "type": ["string", "null"], "pattern": "^[a-z0-9-]+$" },
+    "thread_id": { "type": ["string", "null"], "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "channel": {
+      "type": ["string", "null"],
+      "enum": ["linkedin", "email", "whatsapp", "ats", null]
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "inbound-received",
+        "draft-created",
+        "clipboard-handoff",
+        "send-attempted",
+        "send-confirmed",
+        "send-unconfirmed",
+        "slot-proposed",
+        "slot-booked",
+        "slot-cancelled",
+        "cv-tailored",
+        "profile-synced",
+        "guardrail-deflected",
+        "quarterly-reset",
+        "resume-session"
+      ]
+    },
+    "owner": { "type": "string", "enum": ["operator", "agent"] },
+    "outcome": { "type": "string", "enum": ["ok", "error", "deferred"] },
+    "notes": { "type": "string", "maxLength": 500 },
+    "prev_event_id": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$",
+      "description": "Corrections reference the prior event rather than mutating it."
+    }
+  },
+  "additionalProperties": false
+}

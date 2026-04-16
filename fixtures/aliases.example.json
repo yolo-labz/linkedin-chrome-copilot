@@ -1,0 +1,85 @@
+{
+  "$comment": "SYNTHETIC-PLACEHOLDER: example alias map. Real operators keep this file at ~/.config/linkedin-copilot/aliases.json (chmod 600, gitignored). Never commit real contact data. All entries below use *@example.invalid and contact-XX aliases.",
+  "version": 1,
+  "updated": "2026-04-16",
+  "contacts": {
+    "contact-a7": {
+      "channel_handles": {
+        "linkedin": "https://www.linkedin.com/in/contact-a7-example",
+        "email": "contact-a7@example.invalid",
+        "whatsapp": "+00-000-000-0000"
+      },
+      "org_slug": "acme-corp",
+      "role_label": "Backend Engineer"
+    },
+    "contact-b2": {
+      "channel_handles": {
+        "linkedin": "https://www.linkedin.com/in/contact-b2-example",
+        "email": "contact-b2@example.invalid"
+      },
+      "org_slug": "globex",
+      "role_label": "Engineering Manager"
+    },
+    "contact-c3": {
+      "channel_handles": {
+        "whatsapp": "+00-000-000-0001",
+        "email": "contact-c3@example.invalid"
+      },
+      "org_slug": "initech",
+      "role_label": "Recruiter"
+    },
+    "contact-d9": {
+      "channel_handles": {
+        "linkedin": "https://www.linkedin.com/in/contact-d9-example"
+      },
+      "org_slug": "umbrella",
+      "role_label": "Staff Engineer"
+    },
+    "contact-e5": {
+      "channel_handles": {
+        "email": "contact-e5@example.invalid",
+        "ats": "https://ats.example.invalid/candidate/contact-e5"
+      },
+      "org_slug": "cyberdyne",
+      "role_label": "Platform Engineer"
+    },
+    "contact-f1": {
+      "channel_handles": {
+        "linkedin": "https://www.linkedin.com/in/contact-f1-example",
+        "email": "contact-f1@example.invalid"
+      },
+      "org_slug": "hooli",
+      "role_label": "Tech Lead"
+    },
+    "contact-g4": {
+      "channel_handles": {
+        "email": "contact-g4@example.invalid"
+      },
+      "org_slug": "piedpiper",
+      "role_label": "Recruiter"
+    },
+    "contact-h8": {
+      "channel_handles": {
+        "linkedin": "https://www.linkedin.com/in/contact-h8-example"
+      },
+      "org_slug": "vandelay",
+      "role_label": "Director of Engineering"
+    },
+    "contact-i6": {
+      "channel_handles": {
+        "whatsapp": "+00-000-000-0002",
+        "linkedin": "https://www.linkedin.com/in/contact-i6-example"
+      },
+      "org_slug": "massive-dynamic",
+      "role_label": "Principal Engineer"
+    },
+    "contact-j0": {
+      "channel_handles": {
+        "email": "contact-j0@example.invalid",
+        "ats": "https://ats.example.invalid/candidate/contact-j0"
+      },
+      "org_slug": "stark-industries",
+      "role_label": "Staff Backend Engineer"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# pii-blocklist — names / org fragments forbidden in committed files.
+# One entry per line. Matched case-insensitively as a fixed string (grep -iF).
+# Keep this file short; prefer @example.invalid for generic placeholders.
+#
+# Maintenance: add real-operator-contact names only as needed. Do NOT list
+# common strings that would false-positive on generic narrative text.
