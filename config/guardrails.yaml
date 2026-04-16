@@ -1,0 +1,44 @@
+---
+# guardrails.yaml — default scheduling + workflow guardrails.
+# Any rule can be disabled individually via `enabled: false`.
+# Values here are intentionally conservative defaults.
+
+rules:
+  no_morning_meetings:
+    enabled: true
+    start: "09:00"
+    end: "12:00"
+    timezone: America/Recife
+    reason: "Deep-work block — no external meetings."
+
+  hell_yes_threshold:
+    enabled: true
+    score: 80
+    scale: 100
+    reason: "Reject opportunities that don't clear the fit bar."
+
+  async_over_live:
+    enabled: true
+    prefer_channels: [linkedin, email, whatsapp]
+    reason: "Prefer written async over live calls when the request is answerable in writing."
+
+  quarterly_reset:
+    enabled: true
+    day_of_quarter: 1
+    stale_contact_days: 60
+    reason: "At quarter boundaries, archive stale sessions and flag on-hold contacts."
+
+  send_verify_required:
+    enabled: true
+    timeout_ms: 2000
+    reason: "Never silently promote a Draft to 'sent' without DOM re-read confirmation."
+
+  no_autosend:
+    enabled: true
+    reason: "Default to operator approval before any send. Override per-command only."
+
+  profile_sync_locales:
+    enabled: true
+    pairs:
+      - [en-US, pt-BR]
+    reason: "Keep LinkedIn profile locale variants in sync."

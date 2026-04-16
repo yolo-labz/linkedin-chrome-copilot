@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/yolo-labz/linkedin-chrome-copilot/schemas/save-state.schema.json",
+  "title": "SaveState",
+  "description": "Parsed representation of the canonical markdown save-state file.",
+  "type": "object",
+  "required": [
+    "path",
+    "last_updated_iso",
+    "sections",
+    "active_contacts",
+    "closed_contacts",
+    "session_log",
+    "hot_priority_queue"
+  ],
+  "properties": {
+    "path": { "type": "string", "minLength": 1 },
+    "last_updated_iso": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 timestamp, must not be in the future"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "type": "string" },
+      "description": "Section headers in required order: Identity, Current Status Summary, Active Contacts, Closed Contacts, Session Log, Preferences, Hot-Priority Queue, Next Actions, Inbox Findings"
+    },
+    "active_contacts": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true
+    },
+    "closed_contacts": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true
+    },
+    "session_log": {
+      "type": "array",
+      "items": { "$ref": "./pipeline-event.schema.json" }
+    },
+    "hot_priority_queue": {
+      "type": "array",
+      "maxItems": 10,
+      "items": { "type": "string", "description": "PipelineEvent ULID" }
+    }
+  },
+  "additionalProperties": false
+}

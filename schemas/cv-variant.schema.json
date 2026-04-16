@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/yolo-labz/linkedin-chrome-copilot/schemas/cv-variant.schema.json",
+  "title": "CVVariant",
+  "type": "object",
+  "required": [
+    "id",
+    "base_cv_ref",
+    "jd_ref",
+    "org_slug",
+    "role_slug",
+    "keyword_coverage_pct",
+    "output_md_path",
+    "created_iso"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "base_cv_ref": { "type": "string", "minLength": 1 },
+    "jd_ref": { "type": "string", "minLength": 1 },
+    "org_slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "maxLength": 40 },
+    "role_slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "maxLength": 40 },
+    "keyword_coverage_pct": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "output_md_path": {
+      "type": "string",
+      "pattern": "cv-[a-z0-9-]+-[a-z0-9-]+-\\d{8}\\.md$"
+    },
+    "output_pdf_path": {
+      "type": ["string", "null"],
+      "pattern": "cv-[a-z0-9-]+-[a-z0-9-]+-\\d{8}\\.pdf$"
+    },
+    "created_iso": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
