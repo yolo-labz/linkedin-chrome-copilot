@@ -1,0 +1,41 @@
+---
+# registers.yaml — channel-aware tone & constraints for outreach-drafter.
+# Used by skills/draft-reply to pick the correct register.
+
+channels:
+  linkedin:
+    max_chars: 400
+    tone: warm, concise, first-person, no markdown
+    greeting_style: first-name-only
+    signoff: "— {operator_first_name_placeholder}"
+    forbidden: [links_in_first_message, markdown_headings, emoji_heavy]
+    locale_default: en-US
+
+  email:
+    max_chars: 1500
+    tone: professional, full paragraphs, subject mandatory
+    greeting_style: "Hi {alias}"
+    signoff: "Best, {operator_first_name_placeholder}"
+    subject_required: true
+    forbidden: [emoji_heavy]
+    locale_default: en-US
+
+  whatsapp:
+    max_chars: 600
+    tone: direct, friendly, short sentences, emojis OK (1-2)
+    greeting_style: "Oi {alias}!"
+    signoff: ""
+    locale_default: pt-BR
+    locale_override_on_thread_language: true
+
+  ats:
+    max_chars: 0
+    tone: n/a
+    mode: auto-form-only
+    forbidden: [freeform_body, follow_up_via_ats]
+
+  github:
+    max_chars: 1000
+    tone: neutral, technical, markdown allowed
+    greeting_style: none
+    locale_default: en-US

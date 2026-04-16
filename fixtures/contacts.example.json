@@ -1,0 +1,92 @@
+[
+  {
+    "alias": "contact-a7",
+    "channel": "linkedin",
+    "stage": "responded",
+    "org_slug": "acme-corp",
+    "role_label": "Backend Engineer",
+    "last_touch": "2026-04-12T14:30-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-b2",
+    "channel": "linkedin",
+    "stage": "awaiting-reply",
+    "org_slug": "globex",
+    "role_label": "Engineering Manager",
+    "last_touch": "2026-04-16T11:05-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-c3",
+    "channel": "whatsapp",
+    "stage": "interview-scheduled",
+    "org_slug": "initech",
+    "role_label": "Recruiter",
+    "last_touch": "2026-04-16T14:22-03:00",
+    "locale": "pt-BR"
+  },
+  {
+    "alias": "contact-d9",
+    "channel": "linkedin",
+    "stage": "responded",
+    "org_slug": "umbrella",
+    "role_label": "Staff Engineer",
+    "last_touch": "2026-04-14T14:00-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-e5",
+    "channel": "email",
+    "stage": "sent",
+    "org_slug": "cyberdyne",
+    "role_label": "Platform Engineer",
+    "last_touch": "2026-04-14T20:15-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-f1",
+    "channel": "linkedin",
+    "stage": "awaiting-reply",
+    "org_slug": "hooli",
+    "role_label": "Tech Lead",
+    "last_touch": "2026-04-15T17:12-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-g4",
+    "channel": "email",
+    "stage": "awaiting-reply",
+    "org_slug": "piedpiper",
+    "role_label": "Recruiter",
+    "last_touch": "2026-04-14T16:45-03:00",
+    "locale": "pt-BR"
+  },
+  {
+    "alias": "contact-h8",
+    "channel": "linkedin",
+    "stage": "on-hold",
+    "org_slug": "vandelay",
+    "role_label": "Director of Engineering",
+    "last_touch": "2026-04-12T17:00-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-i6",
+    "channel": "linkedin",
+    "stage": "responded",
+    "org_slug": "massive-dynamic",
+    "role_label": "Principal Engineer",
+    "last_touch": "2026-04-10T20:45-03:00",
+    "locale": "en-US"
+  },
+  {
+    "alias": "contact-j0",
+    "channel": "ats",
+    "stage": "sent",
+    "org_slug": "stark-industries",
+    "role_label": "Staff Backend Engineer",
+    "last_touch": "2026-04-11T18:30-03:00",
+    "locale": "en-US"
+  }
+]
