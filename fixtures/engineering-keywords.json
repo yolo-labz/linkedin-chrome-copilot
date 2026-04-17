@@ -1,0 +1,14 @@
+{
+  "$comment": "Curated engineering keyword list for CV-JD TF-IDF-style scoring. Case-insensitive match.",
+  "languages": ["Go", "Rust", "TypeScript", "JavaScript", "Python", "Elixir", "Java", "Kotlin", "Scala", "C++", "C#", "Swift", "Ruby", "Nix"],
+  "runtimes": ["Node.js", "Deno", "Bun", "JVM", "Tokio", ".NET", "BEAM", "Erlang"],
+  "infrastructure": ["Kubernetes", "Terraform", "Docker", "AWS", "GCP", "Azure", "Nomad", "Consul", "Istio", "Envoy"],
+  "data_stores": ["PostgreSQL", "MySQL", "Redis", "Elasticsearch", "Cassandra", "DynamoDB", "BigQuery", "ClickHouse", "Snowflake"],
+  "streaming": ["Kafka", "NATS", "RabbitMQ", "Pulsar", "Kinesis", "PubSub"],
+  "observability": ["Prometheus", "Grafana", "OpenTelemetry", "Datadog", "Honeycomb", "Sentry"],
+  "practices": ["TDD", "CI/CD", "SRE", "SLO", "SLA", "observability", "incident review", "blameless", "chaos engineering", "feature flags"],
+  "protocols": ["gRPC", "GraphQL", "REST", "WebSocket", "HTTP/2", "HTTP/3"],
+  "security": ["TLS", "OAuth2", "OIDC", "JWT", "secrets management", "SBOM", "attestation", "Sigstore", "SLSA", "supply chain"],
+  "platforms": ["Linux", "macOS", "NixOS", "Debian", "Ubuntu", "Alpine"],
+  "architectures": ["distributed systems", "event-driven", "microservices", "monolith", "service-oriented", "serverless", "edge"]
+}
