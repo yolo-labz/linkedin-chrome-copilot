@@ -53,3 +53,11 @@ MIT. See [LICENSE](./LICENSE).
 ## Security
 
 Report vulnerabilities privately via GitHub Private Vulnerability Reporting. See [SECURITY.md](./SECURITY.md).
+
+## See also (yolo-labz ecosystem)
+
+- [yolo-labz/claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) — Chrome window/tab control + cliclick that this plugin delegates browser I/O to. Sibling, required dep.
+- [yolo-labz/wa](https://github.com/yolo-labz/wa) — WhatsApp daemon for cross-channel pipelines (recruiter pings → LinkedIn / WhatsApp triage in one save-state).
+- [yolo-labz/kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) — TTS daemon for spoken status feedback during long agent runs.
+- Engineering writeups (architecture deep-dives, Chrome automation patterns, agent design): [blog.home301server.com.br](https://blog.home301server.com.br).
+- Plugin author portfolio + claim-vs-evidence map: [portfolio.home301server.com.br](https://portfolio.home301server.com.br).
