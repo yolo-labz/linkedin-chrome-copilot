@@ -126,8 +126,16 @@ jobs:
           egress-policy: audit
 
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
+          persist-credentials: false
+          path: linkedin-chrome-copilot
+
+      - name: Checkout sibling plugin claude-mac-chrome
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: yolo-labz/claude-mac-chrome
+          path: claude-mac-chrome
           persist-credentials: false
 
       - name: Install bats-core + jq
@@ -135,6 +143,7 @@ jobs:
 
       - name: Run bats
         run: |
+          cd linkedin-chrome-copilot
           if [ -d tests/bats ] && ls tests/bats/*.bats >/dev/null 2>&1; then
             bats tests/bats/
           else
