@@ -16,7 +16,7 @@ concurrency:
 jobs:
   lint-shell:
     name: shellcheck + shfmt
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Linux, X64]
     permissions:
       contents: read
     timeout-minutes: 10
@@ -53,7 +53,7 @@ jobs:
 
   pii-scan:
     name: pii-scan (hard gate)
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Linux, X64]
     permissions:
       contents: read
     timeout-minutes: 5
@@ -73,7 +73,7 @@ jobs:
 
   validate-fixtures:
     name: fixture + schema validation
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Linux, X64]
     permissions:
       contents: read
     timeout-minutes: 5
@@ -152,7 +152,7 @@ jobs:
 
   actionlint:
     name: actionlint + zizmor
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, Linux, X64]
     permissions:
       contents: read
     timeout-minutes: 5
