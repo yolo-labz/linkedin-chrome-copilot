@@ -44,14 +44,17 @@ trap 'rm -f "${_blocklist}" "${_tmphits}"' EXIT
 _has_blocklist=0
 if [ -f "${_blocklist_raw}" ]; then
   # Strip blank lines and comments (#). A file of only comments has no patterns.
-  grep -vE '^\s*(#|$)' "${_blocklist_raw}" > "${_blocklist}" 2>/dev/null || true
+  grep -vE '^\s*(#|$)' "${_blocklist_raw}" >"${_blocklist}" 2>/dev/null || true
   if [ -s "${_blocklist}" ]; then
     _has_blocklist=1
   fi
 fi
 
-# Iterate tracked files. Use git when available, fall back to find.
-if git rev-parse --git-dir >/dev/null 2>&1; then
+# Iterate files. If args supplied, scan only those (used by fuzz tests +
+# pre-commit hook). Otherwise walk every tracked file in the repo.
+if [ "$#" -gt 0 ]; then
+  _files="$(printf '%s\n' "$@")"
+elif git rev-parse --git-dir >/dev/null 2>&1; then
   _files="$(git ls-files)"
 else
   _files="$(find . -type f -not -path './.git/*' -not -path './node_modules/*' | sed 's|^\./||')"
@@ -60,7 +63,7 @@ fi
 printf '%s\n' "${_files}" | while IFS= read -r _f; do
   [ -z "${_f}" ] && continue
   case "${_f}" in
-    .git/*|*/node_modules/*|tools/pii-blocklist.txt|LICENSE) continue ;;
+    .git/* | */node_modules/* | tools/pii-blocklist.txt | LICENSE) continue ;;
   esac
   if ! LC_ALL=C grep -Iq . "${_f}" 2>/dev/null; then continue; fi
 
@@ -68,8 +71,8 @@ printf '%s\n' "${_files}" | while IFS= read -r _f; do
   # Emails (applying allowlist domains).
   for _m in $(grep -oE "${_RE_EMAIL}" "${_f}" 2>/dev/null || true); do
     case "${_m}" in
-      *@example.invalid|*@example.com|*@example.org) ;;
-      noreply@*|*@github.com|*@users.noreply.github.com) ;;
+      *@example.invalid | *@example.com | *@example.org) ;;
+      noreply@* | *@github.com | *@users.noreply.github.com) ;;
       *) _hit_here=1 ;;
     esac
   done
@@ -88,7 +91,7 @@ printf '%s\n' "${_files}" | while IFS= read -r _f; do
   #  - ISO dates / date-times (YYYY-MM-DDTHH:MM:SS with tz suffix like -03:00)
   #  - All-zero synthetic placeholders (+00-000-000-0000)
   case "${_f}" in
-    *.md|*.txt|*.json|*.yaml|*.yml)
+    *.md | *.txt | *.json | *.yaml | *.yml)
       _phone_matches="$(grep -oE "${_RE_PHONE}" "${_f}" 2>/dev/null || true)"
       if [ -n "${_phone_matches}" ]; then
         # Filter out pure dates and all-zero placeholders.
