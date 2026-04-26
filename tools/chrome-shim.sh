@@ -14,12 +14,21 @@ set -eu
 
 if [ -z "${LC_SIBLING_ROOT:-}" ]; then
   # shellcheck source=/dev/null
-  . "$(dirname "$0")/platform-gate.sh"
+  . "$(dirname "${BASH_SOURCE[0]}")/platform-gate.sh"
 fi
 
-_chrome_lib="${LC_SIBLING_ROOT}/lib/chrome-lib.sh"
-if [ ! -f "${_chrome_lib}" ]; then
-  printf 'chrome-shim: chrome-lib.sh not found at %s\n' "${_chrome_lib}" >&2
+# claude-mac-chrome layout (post-1.1.x): chrome-lib lives under skills/
+# rather than the legacy lib/. Probe both for backward compatibility.
+for _candidate in \
+  "${LC_SIBLING_ROOT}/skills/chrome-multi-profile/chrome-lib.sh" \
+  "${LC_SIBLING_ROOT}/lib/chrome-lib.sh"; do
+  if [ -f "${_candidate}" ]; then
+    _chrome_lib="${_candidate}"
+    break
+  fi
+done
+if [ -z "${_chrome_lib:-}" ]; then
+  printf 'chrome-shim: chrome-lib.sh not found under %s/skills/chrome-multi-profile/ or /lib/\n' "${LC_SIBLING_ROOT}" >&2
   exit 5
 fi
 

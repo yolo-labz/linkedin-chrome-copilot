@@ -22,9 +22,11 @@ EOF
   exit 7
 fi
 
-# Count sections.
-_active="$(awk '/^## Active Contacts/,/^## /{if(/^- /) print}' "${_ss_path}" | wc -l | tr -d ' ')"
-_closed="$(awk '/^## Closed Contacts/,/^## /{if(/^- /) print}' "${_ss_path}" | wc -l | tr -d ' ')"
+# Count sections. State-flag awk avoids the range-pattern self-match bug:
+# `/^## Active Contacts/,/^## /` collapses to a single line because the
+# start line also matches `^## `.
+_active="$(awk '/^## Active Contacts/{f=1; next} /^## /{f=0} f && /^- /' "${_ss_path}" | wc -l | tr -d ' ')"
+_closed="$(awk '/^## Closed Contacts/{f=1; next} /^## /{f=0} f && /^- /' "${_ss_path}" | wc -l | tr -d ' ')"
 
 # Days since latest session-log entry.
 _latest_ts="$(awk '/^## Session Log/{found=1;next} found && /^- [0-9]{4}-[0-9]{2}-[0-9]{2}/{print $2; exit}' "${_ss_path}")"
