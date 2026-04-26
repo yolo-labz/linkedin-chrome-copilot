@@ -17,13 +17,34 @@ _has_verify=0
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --action) _action="$2"; shift 2 ;;
-    --slot-hhmm) _slot_hhmm="$2"; shift 2 ;;
-    --fit-score) _fit_score="$2"; shift 2 ;;
-    --channel) _channel="$2"; shift 2 ;;
-    --approved) _approved=1; shift ;;
-    --has-verify) _has_verify=1; shift ;;
-    *) printf 'guardrails: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --action)
+      _action="$2"
+      shift 2
+      ;;
+    --slot-hhmm)
+      _slot_hhmm="$2"
+      shift 2
+      ;;
+    --fit-score)
+      _fit_score="$2"
+      shift 2
+      ;;
+    --channel)
+      _channel="$2"
+      shift 2
+      ;;
+    --approved)
+      _approved=1
+      shift
+      ;;
+    --has-verify)
+      _has_verify=1
+      shift
+      ;;
+    *)
+      printf 'guardrails: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 
@@ -38,7 +59,8 @@ fi
 
 # Extract a scalar field nested under a rule key (awk state machine).
 _get() {
-  _rule="$1"; _field="$2"
+  _rule="$1"
+  _field="$2"
   awk -v r="${_rule}" -v f="${_field}" '
     BEGIN { in_r=0 }
     $0 ~ "^  " r ":" { in_r=1; next }
@@ -55,7 +77,7 @@ _hhmm_to_min() {
   IFS=: read -r _h _m <<EOF
 $1
 EOF
-  printf '%s' $(( 10#${_h} * 60 + 10#${_m} ))
+  printf '%s' $((10#${_h} * 60 + 10#${_m}))
 }
 
 _triggered=""
@@ -63,7 +85,8 @@ _verdict="allow"
 _sep=""
 
 _add() {
-  _rule="$1"; _reason="$2"
+  _rule="$1"
+  _reason="$2"
   _triggered="${_triggered}${_sep}{\"rule\":\"${_rule}\",\"reason\":\"${_reason}\"}"
   _sep=","
 }
@@ -115,7 +138,7 @@ if [ "${_action}" = "book_slot" ] && [ -n "${_channel}" ]; then
   _en="$(_get async_over_live enabled)"
   if [ "${_en}" = "true" ]; then
     case "${_channel}" in
-      linkedin|email|whatsapp)
+      linkedin | email | whatsapp)
         _add "async_over_live" "channel ${_channel} typically resolvable async — consider drafting first"
         if [ "${_verdict}" = "allow" ]; then _verdict="warn"; fi
         ;;

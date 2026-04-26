@@ -14,12 +14,27 @@ _max=3
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --contact) _alias="$2"; shift 2 ;;
+    --contact)
+      _alias="$2"
+      shift 2
+      ;;
     --source-url) shift 2 ;;
-    --calendly) _cal="$2"; shift 2 ;;
-    --free-window) _fw="$2"; shift 2 ;;
-    --max) _max="$2"; shift 2 ;;
-    *) printf 'book-slot: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --calendly)
+      _cal="$2"
+      shift 2
+      ;;
+    --free-window)
+      _fw="$2"
+      shift 2
+      ;;
+    --max)
+      _max="$2"
+      shift 2
+      ;;
+    *)
+      printf 'book-slot: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 

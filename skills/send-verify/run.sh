@@ -15,11 +15,26 @@ _timeout=2000
 _alias=""
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --fingerprint) _fp="$2"; shift 2 ;;
-    --marker) _marker="$2"; shift 2 ;;
-    --timeout-ms) _timeout="$2"; shift 2 ;;
-    --alias) _alias="$2"; shift 2 ;;
-    *) printf 'send-verify: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --fingerprint)
+      _fp="$2"
+      shift 2
+      ;;
+    --marker)
+      _marker="$2"
+      shift 2
+      ;;
+    --timeout-ms)
+      _timeout="$2"
+      shift 2
+      ;;
+    --alias)
+      _alias="$2"
+      shift 2
+      ;;
+    *)
+      printf 'send-verify: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 
@@ -30,11 +45,11 @@ fi
 
 _js="(() => { return document.body.innerText.includes(\"${_marker}\") ? \"found\" : \"\"; })()"
 
-_deadline=$(( $(date +%s%3N 2>/dev/null || date +%s)000 / 1 ))
+_deadline=$(($(date +%s%3N 2>/dev/null || date +%s)000 / 1))
 # bash 3.2 lacks %s%3N; fall back to loop with sub-second sleeps.
 _start=$(date +%s)
 _state="unconfirmed"
-while [ "$(( ( $(date +%s) - _start ) * 1000 ))" -lt "${_timeout}" ]; do
+while [ "$((($(date +%s) - _start) * 1000))" -lt "${_timeout}" ]; do
   _result="$(lc_execute_js "${_fp}" "${_js}" 2>/dev/null || true)"
   if [ "${_result}" = "found" ]; then
     _state="sent"
