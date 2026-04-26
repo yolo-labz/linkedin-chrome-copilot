@@ -38,7 +38,7 @@ _sibling_manifest="${_sibling_root}/.claude-plugin/plugin.json"
 if [ -f "${_sibling_manifest}" ]; then
   _sibling_ver="$(grep -E '"version"' "${_sibling_manifest}" | head -n 1 | sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/')"
   case "${_sibling_ver}" in
-    0.*|1.0.*|1.1.0)
+    0.* | 1.0.* | 1.1.0)
       printf 'linkedin-chrome-copilot: claude-mac-chrome %s is too old (need >= 1.1.1).\n' "${_sibling_ver}" >&2
       exit 3
       ;;

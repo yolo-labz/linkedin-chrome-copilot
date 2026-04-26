@@ -15,11 +15,26 @@ _render_pdf=0
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --base) _base="$2"; shift 2 ;;
-    --jd) _jd="$2"; shift 2 ;;
-    --out-dir) _out_dir="$2"; shift 2 ;;
-    --render-pdf) _render_pdf=1; shift ;;
-    *) printf 'tailor-cv: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --base)
+      _base="$2"
+      shift 2
+      ;;
+    --jd)
+      _jd="$2"
+      shift 2
+      ;;
+    --out-dir)
+      _out_dir="$2"
+      shift 2
+      ;;
+    --render-pdf)
+      _render_pdf=1
+      shift
+      ;;
+    *)
+      printf 'tailor-cv: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 
@@ -40,7 +55,8 @@ mkdir -p "${_out_dir}"
 
 # Extract frontmatter key from JD via awk (between leading --- markers).
 _fm_get() {
-  _file="$1"; _key="$2"
+  _file="$1"
+  _key="$2"
   awk -v k="${_key}" '
     BEGIN{ in_fm=0; count=0 }
     /^---[[:space:]]*$/ { count++; if (count==1) { in_fm=1; next } else { exit } }
@@ -94,11 +110,11 @@ while IFS= read -r _kw_item; do
   case "${_jd_body_lc}" in *"${_kw_item}"*) _in_jd=1 ;; esac
   case "${_cv_body_lc}" in *"${_kw_item}"*) _in_cv=1 ;; esac
   if [ "${_in_jd}" -eq 1 ]; then
-    _n_jd=$((_n_jd+1))
+    _n_jd=$((_n_jd + 1))
     _k_jd="${_k_jd}${_kw_item}
 "
     if [ "${_in_cv}" -eq 1 ]; then
-      _n_both=$((_n_both+1))
+      _n_both=$((_n_both + 1))
     fi
   fi
   if [ "${_in_cv}" -eq 1 ]; then
@@ -112,7 +128,7 @@ EOF
 if [ "${_n_jd}" -eq 0 ]; then
   _coverage=0
 else
-  _coverage=$(( _n_both * 100 / _n_jd ))
+  _coverage=$((_n_both * 100 / _n_jd))
 fi
 
 # Reorder experience bullets by JD-keyword density within each role.
@@ -187,7 +203,7 @@ awk -v kjd="${_k_jd}" '
     print
   }
   END{ if (in_role) flush() }
-' "${_base}" > "${_md_path}"
+' "${_base}" >"${_md_path}"
 
 _pdf_path="null"
 if [ "${_render_pdf}" -eq 1 ]; then

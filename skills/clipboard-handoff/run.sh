@@ -14,10 +14,22 @@ _url=""
 _alias=""
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --profile) _profile="$2"; shift 2 ;;
-    --url) _url="$2"; shift 2 ;;
-    --alias) _alias="$2"; shift 2 ;;
-    *) printf 'clipboard-handoff: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --profile)
+      _profile="$2"
+      shift 2
+      ;;
+    --url)
+      _url="$2"
+      shift 2
+      ;;
+    --alias)
+      _alias="$2"
+      shift 2
+      ;;
+    *)
+      printf 'clipboard-handoff: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 

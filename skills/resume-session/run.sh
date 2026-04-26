@@ -33,10 +33,10 @@ if [ -n "${_latest_date}" ]; then
   # POSIX-compatible day delta via date arithmetic (GNU date only; fall back to 0).
   if _now_epoch="$(date +%s 2>/dev/null)" \
     && _then_epoch="$(date -j -f '%Y-%m-%d' "${_latest_date}" +%s 2>/dev/null)"; then
-    _days=$(( (_now_epoch - _then_epoch) / 86400 ))
+    _days=$(((_now_epoch - _then_epoch) / 86400))
   elif _then_epoch="$(date -d "${_latest_date}" +%s 2>/dev/null)"; then
     _now_epoch="$(date +%s)"
-    _days=$(( (_now_epoch - _then_epoch) / 86400 ))
+    _days=$(((_now_epoch - _then_epoch) / 86400))
   else
     _days=0
   fi
@@ -82,4 +82,4 @@ case "${_ss_path}" in
 esac
 
 _ts="$(date +%Y-%m-%dT%H:%M:%S%z | sed -E 's/([0-9]{2})$/:\1/')"
-printf '\n- %s resume-session emitted %d next actions\n' "${_ts}" "$(printf '%s' "${_hot_json}" | tr -cd ',' | wc -c | awk '{print $1+1}')" >> "${_ss_path}"
+printf '\n- %s resume-session emitted %d next actions\n' "${_ts}" "$(printf '%s' "${_hot_json}" | tr -cd ',' | wc -c | awk '{print $1+1}')" >>"${_ss_path}"
