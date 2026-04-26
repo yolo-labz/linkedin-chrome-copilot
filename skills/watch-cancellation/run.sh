@@ -13,10 +13,22 @@ _file=""
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --alias) _alias="$2"; shift 2 ;;
-    --slot) _slot="$2"; shift 2 ;;
-    --file) _file="$2"; shift 2 ;;
-    *) printf 'watch-cancellation: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --alias)
+      _alias="$2"
+      shift 2
+      ;;
+    --slot)
+      _slot="$2"
+      shift 2
+      ;;
+    --file)
+      _file="$2"
+      shift 2
+      ;;
+    *)
+      printf 'watch-cancellation: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 

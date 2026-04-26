@@ -13,10 +13,22 @@ _contacts="${LC_CONTACTS_PATH:-${_self}/fixtures/contacts.example.json}"
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --alias) _alias="$2"; shift 2 ;;
-    --channel) _channel="$2"; shift 2 ;;
-    --contacts) _contacts="$2"; shift 2 ;;
-    *) printf 'draft-reply: unknown arg %s\n' "$1" >&2; exit 2 ;;
+    --alias)
+      _alias="$2"
+      shift 2
+      ;;
+    --channel)
+      _channel="$2"
+      shift 2
+      ;;
+    --contacts)
+      _contacts="$2"
+      shift 2
+      ;;
+    *)
+      printf 'draft-reply: unknown arg %s\n' "$1" >&2
+      exit 2
+      ;;
   esac
 done
 
