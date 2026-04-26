@@ -23,7 +23,7 @@ fi
 # Sibling plugin discovery. CLAUDE_PLUGIN_ROOT points at this plugin's root
 # when invoked by the Claude Code runtime. Fall back to a best-effort parent
 # walk if unset (e.g., during `bats` tests).
-_plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+_plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 _sibling_root="${_plugin_root}/../claude-mac-chrome"
 
 if [ ! -d "${_sibling_root}" ]; then

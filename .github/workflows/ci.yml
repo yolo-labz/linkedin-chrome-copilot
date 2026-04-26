@@ -133,6 +133,12 @@ jobs:
       - name: Install bats-core + jq
         run: brew install bats-core jq
 
+      - name: Clone sibling claude-mac-chrome (required by platform-gate.sh)
+        run: |
+          git clone --depth 1 \
+            https://github.com/yolo-labz/claude-mac-chrome.git \
+            "${GITHUB_WORKSPACE}/../claude-mac-chrome"
+
       - name: Run bats
         run: |
           if [ -d tests/bats ] && ls tests/bats/*.bats >/dev/null 2>&1; then
