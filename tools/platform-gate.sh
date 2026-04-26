@@ -24,7 +24,10 @@ fi
 # when invoked by the Claude Code runtime. Fall back to a best-effort parent
 # walk if unset (e.g., during `bats` tests).
 _plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-_sibling_root="${_plugin_root}/../claude-mac-chrome"
+# LC_SIBLING_ROOT_OVERRIDE lets bats tests pin the sibling location
+# directly so symlinked virtual layouts don't get re-resolved into the
+# real filesystem hierarchy by `..` traversal.
+_sibling_root="${LC_SIBLING_ROOT_OVERRIDE:-${_plugin_root}/../claude-mac-chrome}"
 
 if [ ! -d "${_sibling_root}" ]; then
   printf 'linkedin-chrome-copilot: sibling plugin claude-mac-chrome not found.\n' >&2

@@ -29,6 +29,10 @@ EOF
   ln -s "$REPO" "$SIBLING_PARENT/linkedin-chrome-copilot"
   ln -s "$TDIR/claude-mac-chrome" "$SIBLING_PARENT/claude-mac-chrome"
   export CLAUDE_PLUGIN_ROOT="$SIBLING_PARENT/linkedin-chrome-copilot"
+  # Pin the sibling root explicitly — `..` traversal through the
+  # symlinked plugin root would otherwise resolve into the real
+  # filesystem hierarchy and miss the test stub.
+  export LC_SIBLING_ROOT_OVERRIDE="$TDIR/claude-mac-chrome"
   export PATH="$TDIR:$PATH"
 }
 
@@ -38,9 +42,10 @@ teardown() {
 
 @test "pbcopy receives body bytes" {
   if [ "$(uname -s)" != "Darwin" ]; then skip "macOS-only"; fi
-  # bats run captures status/output; pipe stdin via bash -c so the body
-  # actually reaches the script's stdin.
-  run bash -c "printf 'hello from draft' | bash '$REPO/skills/clipboard-handoff/run.sh' --profile work --url 'linkedin.com/messaging' --alias contact-a7"
+  # bats `run` swallows stdin from a pipe, so don't use it here. Capture
+  # status + output manually so the script actually receives stdin.
+  output="$(printf 'hello from draft' | bash "$REPO/skills/clipboard-handoff/run.sh" --profile work --url 'linkedin.com/messaging' --alias contact-a7)"
+  status=$?
   [ "$status" -eq 0 ]
   clip="$(cat "$TDIR/clipboard.out")"
   [ "$clip" = "hello from draft" ]
