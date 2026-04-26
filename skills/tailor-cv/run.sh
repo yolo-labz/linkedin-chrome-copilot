@@ -146,19 +146,32 @@ _ulid="$(LC_ALL=C awk -v n=26 'BEGIN{
 
 # awk script: within "## Experience" section, buffer bullets per role and
 # re-emit sorted by keyword density (descending, stable for ties).
-awk -v kjd="${_k_jd}" '
-  function score_bullet(line,    s, n, i, arr, k) {
+# Keyword list passed via temp file — BSD awk rejects literal newlines in
+# `-v var=...` values ("newline in string" abort).
+_kjd_file="$(mktemp)"
+trap 'rm -f "${_kjd_file}"' EXIT
+printf '%s' "${_k_jd}" >"${_kjd_file}"
+
+awk -v kjdfile="${_kjd_file}" '
+  function load_keywords(    line, n) {
+    n=0
+    while ((getline line < kjdfile) > 0) {
+      if (line != "") { n++; kjd[n]=line }
+    }
+    close(kjdfile)
+    nkj=n
+  }
+  function score_bullet(line,    s, i, k) {
     s=0
-    n=split(kjd, arr, "\n")
     lc=tolower(line)
-    for(i=1;i<=n;i++){
-      k=arr[i]
+    for(i=1;i<=nkj;i++){
+      k=kjd[i]
       if (k=="") continue
       if (index(lc, k) > 0) s++
     }
     return s
   }
-  function flush(    i, j, tmp, tmps) {
+  function flush(    i, j, tmp, tmps, n, lines, k) {
     # stable sort by desc score; bullets[] with scores[]
     for(i=1;i<=nb;i++){
       for(j=i+1;j<=nb;j++){
@@ -168,10 +181,15 @@ awk -v kjd="${_k_jd}" '
         }
       }
     }
-    for(i=1;i<=nb;i++) print bullets[i]
+    # Bullets store continuation lines joined by \033 sentinel (BSD awk
+    # rejects literal \n inside array values). Split + reprint here.
+    for(i=1;i<=nb;i++){
+      n=split(bullets[i], lines, "\033")
+      for(k=1;k<=n;k++) print lines[k]
+    }
     nb=0
   }
-  BEGIN{ in_exp=0; in_role=0; nb=0 }
+  BEGIN{ in_exp=0; in_role=0; nb=0; nkj=0; load_keywords() }
   /^## / {
     if (in_role) flush()
     in_role=0
@@ -192,8 +210,8 @@ awk -v kjd="${_k_jd}" '
       next
     }
     if (in_role && nb>0 && $0 ~ /^[[:space:]]+[^[:space:]]/) {
-      # continuation of previous bullet
-      bullets[nb]=bullets[nb] "\n" $0
+      # continuation of previous bullet — join with \033 sentinel
+      bullets[nb]=bullets[nb] "\033" $0
       scores[nb]=scores[nb] + score_bullet($0)
       next
     }
