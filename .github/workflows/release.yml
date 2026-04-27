@@ -46,7 +46,7 @@ jobs:
           ( cd dist && sha256sum "${NAME}.tar.gz" > "${NAME}.tar.gz.sha256" )
 
       - name: Install syft
-        uses: anchore/sbom-action/download-syft@e11c554f704a0b820cbf8c51673f6988e8e11e2c # v0.17.4
+        uses: anchore/sbom-action/download-syft@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
 
       - name: Generate SBOMs (CycloneDX 1.7 + SPDX 2.3)
         run: |
