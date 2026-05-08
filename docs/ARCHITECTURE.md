@@ -16,8 +16,8 @@ It delegates all macOS Chrome automation to the sibling plugin
    ┌────────────▼────────────────────────────────────────────┐
    │ Skills (skills/<name>/SKILL.md + run.sh)                │
    │   resume-session, draft-reply, clipboard-handoff,       │
-   │   send-verify, book-slot, watch-cancellation,           │
-   │   tailor-cv, profile-sync, guardrails, quarterly-reset  │
+   │   send-verify, book-slot, watch-cancellation,           │ <!-- stealth-allow: skill names -->
+   │   tailor-cv, profile-sync, guardrails, quarterly-reset  │ <!-- stealth-allow: skill names -->
    └────────────┬───────────────────────┬────────────────────┘
                 │                       │
    ┌────────────▼──────────┐  ┌─────────▼──────────┐

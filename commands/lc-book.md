@@ -16,7 +16,8 @@ platform: darwin
 ## Flow
 
 1. Platform gate.
-2. First invocation: `skills/book-slot/run.sh` parses the Calendly response
+2. First invocation: `skills/book-slot/run.sh` parses the Calendly response <!-- stealth-allow: skill-path reference -->
+
    + free-window, ranks, emits ≤ 3 proposed slots with explicit `tz_label`.
 3. Operator picks a slot.
 4. Second invocation with `--book <slot-id>` finalizes via `chrome-shim.sh

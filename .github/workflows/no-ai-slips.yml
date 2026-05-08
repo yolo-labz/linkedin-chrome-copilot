@@ -78,7 +78,7 @@ jobs:
               | grep -v 'stealth-allow' || true)
             if [ -n "$hits" ]; then
               echo "::error::Forbidden term match (pattern: $pattern)"
-              echo "$hits" | sed 's/^/  /'
+              printf '  %s\n' "${hits//$'\n'/$'\n  '}"
               fail=$((fail + 1))
             fi
           done

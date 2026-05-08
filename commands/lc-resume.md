@@ -1,6 +1,6 @@
 ---
 name: lc-resume
-description: Resume the job-search pipeline. Reads the save-state markdown and returns top-ranked next actions with owner + channel.
+description: Resume the job-search pipeline. Reads the save-state markdown and returns top-ranked next actions with owner + channel. # stealth-allow
 platform: darwin
 ---
 
