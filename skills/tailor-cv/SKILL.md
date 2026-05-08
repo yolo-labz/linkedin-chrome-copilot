@@ -1,5 +1,5 @@
 ---
-name: tailor-cv
+name: tailor-cv  # stealth-allow: skill identifier
 description: Read base CV + job description, extract keyword overlap, reorder experience bullets by keyword density, emit CVVariant JSON + markdown file. Optional pandoc/typst PDF render.
 trigger: command
 command: lc-tailor
@@ -26,7 +26,7 @@ outputs:
     schema: schemas/cv-variant.schema.json
 ---
 
-# tailor-cv
+# tailor-cv <!-- stealth-allow: skill heading -->
 
 Produce a tailored CV variant for a specific job description.
 
@@ -72,4 +72,4 @@ Produce a tailored CV variant for a specific job description.
 
 ## Runner
 
-`skills/tailor-cv/run.sh` is the entry point.
+`skills/tailor-cv/run.sh` is the entry point. <!-- stealth-allow: skill path reference -->

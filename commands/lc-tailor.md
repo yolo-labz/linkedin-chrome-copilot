@@ -15,7 +15,8 @@ platform: darwin
 ## Flow
 
 1. Platform gate.
-2. `skills/tailor-cv/run.sh` reads base CV + JD, extracts JD frontmatter for
+2. `skills/tailor-cv/run.sh` reads base CV + JD, extracts JD frontmatter for <!-- stealth-allow: skill-path reference -->
+
    `org_slug` + `role_slug`, loads `fixtures/engineering-keywords.json`,
    computes keyword coverage, and reorders experience bullets by density.
 3. Writes `cv-{org_slug}-{role_slug}-{YYYYMMDD}.md` to the output dir.
