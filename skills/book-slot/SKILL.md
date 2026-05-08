@@ -1,5 +1,5 @@
 ---
-name: book-slot
+name: book-slot  # stealth-allow: skill identifier
 description: Propose ≤ 3 ranked Calendly slots that fit the operator's free-window + guardrails. Every slot carries an explicit timezone label.
 trigger: command
 command: lc-book
@@ -17,7 +17,7 @@ outputs:
     schema: schemas/slot.schema.json
 ---
 
-# book-slot
+# book-slot <!-- stealth-allow: skill heading -->
 
 Parse a Calendly response (fetched separately, or from fixture), intersect
 with `free-window.example.json`, apply guardrail rules, rank, emit the top
