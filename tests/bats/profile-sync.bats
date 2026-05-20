@@ -3,6 +3,12 @@
 
 setup() {
   REPO="$(cd "$BATS_TEST_DIRNAME/../.." && pwd)"
+  # #34: CI runs these on macos-14 GHA runners without the sibling
+  # claude-mac-chrome plugin installed (chrome-shim.sh cannot resolve
+  # LC_SIBLING_ROOT). Stub mode short-circuits the source so the
+  # envelope-shape assertions exercise the locale loop without a real
+  # Chrome host.
+  export PROFILE_SYNC_TEST_STUB=1
 }
 
 @test "emits two opened tabs, one per locale" {
