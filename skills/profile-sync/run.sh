@@ -4,8 +4,18 @@
 set -eu
 
 _self="$(cd "$(dirname "$0")/../.." && pwd)"
-# shellcheck source=/dev/null
-. "${_self}/tools/chrome-shim.sh"
+
+# PROFILE_SYNC_TEST_STUB=1 short-circuits the chrome-shim source (issue #34).
+# Without the sibling claude-mac-chrome plugin installed and bash 4 on PATH,
+# sourcing chrome-shim.sh aborts the run before the locale loop emits JSON,
+# which is what the bats CI runner was hitting. The stub mode lets the bats
+# tests exercise URL+locale envelope shape without a real Chrome host.
+if [ "${PROFILE_SYNC_TEST_STUB:-0}" = "1" ]; then
+  lc_open_tab() { printf 'mock-fp-%s' "$2"; }
+else
+  # shellcheck source=/dev/null
+  . "${_self}/tools/chrome-shim.sh"
+fi
 
 _profile="${LC_LINKEDIN_PROFILE:-LinkedIn}"
 _section="headline"
