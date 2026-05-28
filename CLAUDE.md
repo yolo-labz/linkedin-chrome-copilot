@@ -69,10 +69,10 @@ linkedin-chrome-copilot/
 ├── hooks/                        # SessionStart-*, UserPromptSubmit-*
 ├── schemas/                      # *.schema.json — JSON Schema draft-07
 ├── skills/                       # 10 skills, each <name>/{SKILL.md,run.sh}
-│                                 #   book-slot, clipboard-handoff,
+│                                 #   book-slot, clipboard-handoff,         # stealth-allow: skill name
 │                                 #   draft-reply, guardrails, profile-sync,
 │                                 #   quarterly-reset, resume-session,
-│                                 #   send-verify, tailor-cv,
+│                                 #   send-verify, tailor-cv,               # stealth-allow: skill name
 │                                 #   watch-cancellation
 ├── tests/                        # bats/, fixtures-validate.sh
 ├── tools/                        # platform-gate, chrome-shim, pii-scan,
