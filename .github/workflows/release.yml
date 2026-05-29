@@ -48,7 +48,7 @@ jobs:
       - name: Install syft
         uses: anchore/sbom-action/download-syft@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
 
-      - name: Generate SBOMs (CycloneDX 1.7 + SPDX 2.3)
+      - name: Generate SBOMs (CycloneDX 1.6 + SPDX 2.3)
         run: |
           syft . \
             -o cyclonedx-json@1.6=dist/sbom.cdx.json \
@@ -68,6 +68,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
         with:
+          # Semver pre-releases (v0.1.0-alpha.1, -beta, -rc) carry a hyphen;
+          # stable tags (v1.2.3) do not. Keeps alphas off the "Latest" badge.
+          prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
             dist/linkedin-chrome-copilot-*.tar.gz
             dist/linkedin-chrome-copilot-*.tar.gz.sha256
