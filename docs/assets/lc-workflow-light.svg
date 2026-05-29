@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="lc-workflow-light-title lc-workflow-light-desc">
+  <title id="lc-workflow-light-title">linkedin-chrome-copilot workflow (light): five skill nodes orbiting a central copilot</title>
+  <desc id="lc-workflow-light-desc">Catppuccin Latte diagram. A central copilot node sits in the middle of the canvas with five skill nodes arranged around it (resume, draft-reply, book-slot, tailor-cv, guardrails). Each peripheral node is connected to the center by a thin line. Each peripheral node carries a one-line skill name and a short capability label below it. No LinkedIn UI or trademark is depicted. Pure abstract workflow.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #eff1f5; }
+      .accent { fill: #8839ef; }
+      .node-bg { fill: #e6e9ef; stroke: #8839ef; stroke-width: 2.2; }
+      .node-bg-center { fill: #ccd0da; stroke: #8839ef; stroke-width: 2.8; }
+      .edge { fill: none; stroke: #1e66f5; stroke-width: 1.6; opacity: 0.7; stroke-linecap: round; }
+      .label-skill { font-family: ui-monospace,'JetBrains Mono','Fira Code',Menlo,monospace; font-size: 18px; fill: #4c4f69; font-weight: 600; }
+      .label-cap { font-family: ui-serif,Georgia,'Iowan Old Style','Apple Garamond',serif; font-size: 14px; fill: #6c6f85; }
+      .label-center-title { font-family: ui-serif,Georgia,'Iowan Old Style','Apple Garamond',serif; font-size: 32px; font-weight: 700; fill: #4c4f69; }
+      .label-center-sub { font-family: ui-monospace,'JetBrains Mono','Fira Code',Menlo,monospace; font-size: 14px; fill: #8839ef; }
+      .repo-label { font-family: ui-monospace,'JetBrains Mono','Fira Code',Menlo,monospace; font-size: 11px; fill: #9ca0b0; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" class="bg"/>
+  <rect x="0" y="0" width="1200" height="3" class="accent"/>
+
+  <g>
+    <line x1="600" y1="360" x2="280" y2="170" class="edge"/>
+    <line x1="600" y1="360" x2="920" y2="170" class="edge"/>
+    <line x1="600" y1="360" x2="160" y2="430" class="edge"/>
+    <line x1="600" y1="360" x2="1040" y2="430" class="edge"/>
+    <line x1="600" y1="360" x2="600" y2="600" class="edge"/>
+  </g>
+
+  <g role="group" aria-labelledby="node-center-light-title node-center-light-desc">
+    <title id="node-center-light-title">copilot — orchestrator</title>
+    <desc id="node-center-light-desc">Central orchestrator that routes work to peripheral skills. Delegates Chrome I/O to claude-mac-chrome. Pedro-paste-only sends; never auto-submits.</desc>
+    <circle cx="600" cy="360" r="110" class="node-bg-center"/>
+    <text x="600" y="350" text-anchor="middle" class="label-center-title">copilot</text>
+    <text x="600" y="376" text-anchor="middle" class="label-center-sub">orchestrator</text>
+    <text x="600" y="398" text-anchor="middle" class="label-center-sub">pedro-paste-only</text>
+  </g>
+
+  <g role="group" aria-labelledby="node-resume-light-title node-resume-light-desc" transform="translate(180,98)">
+    <title id="node-resume-light-title">resume — session pipeline state</title>
+    <desc id="node-resume-light-desc">Replays the local plain-markdown save state and surfaces ranked next actions per channel.</desc>
+    <rect x="0" y="0" width="200" height="98" rx="14" class="node-bg"/>
+    <text x="100" y="40" text-anchor="middle" class="label-skill">resume</text>
+    <text x="100" y="66" text-anchor="middle" class="label-cap">pipeline state</text>
+    <text x="100" y="86" text-anchor="middle" class="label-cap">+ next action</text>
+  </g>
+
+  <g role="group" aria-labelledby="node-reply-light-title node-reply-light-desc" transform="translate(820,98)">
+    <title id="node-reply-light-title">draft-reply — channel-aware drafting</title>
+    <desc id="node-reply-light-desc">Channel-aware register selection. Drafts to clipboard; the operator pastes and sends.</desc>
+    <rect x="0" y="0" width="200" height="98" rx="14" class="node-bg"/>
+    <text x="100" y="40" text-anchor="middle" class="label-skill">draft-reply</text>
+    <text x="100" y="66" text-anchor="middle" class="label-cap">channel register</text>
+    <text x="100" y="86" text-anchor="middle" class="label-cap">+ clipboard handoff</text>
+  </g>
+
+  <g role="group" aria-labelledby="node-book-light-title node-book-light-desc" transform="translate(60,358)"> <!-- stealth-allow: skill name -->
+    <title id="node-book-light-title">book-slot — propose calendar slots</title>
+    <desc id="node-book-light-desc">Reads Calendly data and proposes ranked slots; every slot label carries an explicit timezone.</desc>
+    <rect x="0" y="0" width="200" height="98" rx="14" class="node-bg"/>
+    <text x="100" y="40" text-anchor="middle" class="label-skill">book-slot</text>
+    <text x="100" y="66" text-anchor="middle" class="label-cap">propose 3 slots</text>
+    <text x="100" y="86" text-anchor="middle" class="label-cap">+ timezone label</text>
+  </g>
+
+  <g role="group" aria-labelledby="node-tailor-light-title node-tailor-light-desc" transform="translate(940,358)"> <!-- stealth-allow: skill name -->
+    <title id="node-tailor-light-title">tailor-cv — document variant builder</title>
+    <desc id="node-tailor-light-desc">Builds a document variant from a base profile plus a target keyword set; emits markdown plus optional PDF.</desc>
+    <rect x="0" y="0" width="200" height="98" rx="14" class="node-bg"/>
+    <text x="100" y="40" text-anchor="middle" class="label-skill">tailor-cv</text>
+    <text x="100" y="66" text-anchor="middle" class="label-cap">document variant</text>
+    <text x="100" y="86" text-anchor="middle" class="label-cap">+ keyword overlap</text>
+  </g>
+
+  <g role="group" aria-labelledby="node-guard-light-title node-guard-light-desc" transform="translate(500,560)">
+    <title id="node-guard-light-title">guardrails — policy evaluation</title>
+    <desc id="node-guard-light-desc">Evaluates every action against a YAML policy. Returns verdict allow / warn / deny with the rule name.</desc>
+    <rect x="0" y="0" width="200" height="98" rx="14" class="node-bg"/>
+    <text x="100" y="40" text-anchor="middle" class="label-skill">guardrails</text>
+    <text x="100" y="66" text-anchor="middle" class="label-cap">policy verdict</text>
+    <text x="100" y="86" text-anchor="middle" class="label-cap">allow / warn / deny</text>
+  </g>
+
+  <text x="1128" y="698" text-anchor="end" class="repo-label">yolo-labz/linkedin-chrome-copilot</text>
+</svg>
