@@ -51,7 +51,7 @@ jobs:
       - name: Generate SBOMs (CycloneDX 1.7 + SPDX 2.3)
         run: |
           syft . \
-            -o cyclonedx-json@1.7=dist/sbom.cdx.json \
+            -o cyclonedx-json@1.6=dist/sbom.cdx.json \
             -o spdx-json=dist/sbom.spdx.json
 
       - name: Attest build provenance for tarball

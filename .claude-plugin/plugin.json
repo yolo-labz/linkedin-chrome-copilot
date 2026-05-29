@@ -1,6 +1,6 @@
 {
   "name": "linkedin-chrome-copilot",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0-alpha.1",
   "description": "Claude Code plugin for LinkedIn workflows on macOS Chrome. Per-locale profile-edit forms (PT/EN/ES), message-triage routing, send verification, calendar slot booking, document tailoring, locale-variant sync. Chrome automation delegated to claude-mac-chrome sibling plugin. No PII in committed artifacts \u2014 enforced by pii-scan CI gate.",
   "author": {
     "name": "Pedro Henrique Souza Balbino",
