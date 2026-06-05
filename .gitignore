@@ -55,3 +55,15 @@ tests/*.log
 # --- Shell history, logs ---
 *.log
 logs/
+
+# AI tooling config — keep local, never commit
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+/.claude/
+/.cursor/
+.aider*
+.github/copilot-instructions.md
+# JS tooling (commitlint) local-only
+node_modules/
+package-lock.json
