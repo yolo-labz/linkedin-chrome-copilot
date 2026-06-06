@@ -56,8 +56,7 @@ tests/*.log
 *.log
 logs/
 
-# AI tooling config — keep local, never commit
-CLAUDE.md
+# Local AI agent state — keep local, never commit
 CLAUDE.local.md
 AGENTS.md
 /.claude/
