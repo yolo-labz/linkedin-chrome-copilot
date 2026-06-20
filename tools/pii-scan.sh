@@ -92,7 +92,11 @@ printf '%s\n' "${_files}" | while IFS= read -r _f; do
   #  - All-zero synthetic placeholders (+00-000-000-0000)
   case "${_f}" in
     *.md | *.txt | *.json | *.yaml | *.yml)
-      _phone_matches="$(grep -oE "${_RE_PHONE}" "${_f}" 2>/dev/null || true)"
+      # Pre-strip git SHA pins (>=20 hex chars). E.164 caps phone numbers at
+      # 15 digits, so a 20+ contiguous hex run is never a phone; this stops a
+      # SHA-pinned CI `uses:` ref (a hardening requirement) from tripping the
+      # phone regex on a decimal substring inside a 40-char commit SHA.
+      _phone_matches="$(sed -E 's/[0-9a-fA-F]{20,}//g' "${_f}" 2>/dev/null | grep -oE "${_RE_PHONE}" 2>/dev/null || true)"
       if [ -n "${_phone_matches}" ]; then
         # Filter out pure dates and all-zero placeholders.
         _phone_bad="$(printf '%s\n' "${_phone_matches}" \
