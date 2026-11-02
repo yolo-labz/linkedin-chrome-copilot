@@ -18,18 +18,9 @@ updates:
       - dependencies
       - github-actions
 
-  # npm — for commitlint + lefthook dev tooling only. Runtime has no npm deps.
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-      time: "06:00"
-      timezone: America/Recife
-    open-pull-requests-limit: 3
-    commit-message:
-      prefix: chore
-      include: scope
-    labels:
-      - dependencies
-      - npm
+  # No `npm` entry: this repo ships a Claude-plugin bundle, not a Node package —
+  # there is no package.json anywhere in the tree, so the npm updater failed every
+  # scheduled run with `dependency_file_not_found: /package.json not found`
+  # (updater run 41419501225, 02/11). Re-add the entry only alongside a real
+  # package.json. Node tooling (commitlint, lefthook) runs from pinned SHAs in
+  # .pre-commit-config.yaml / lefthook.yml, which need no npm manifest.
