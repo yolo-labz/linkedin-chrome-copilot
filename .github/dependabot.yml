@@ -17,6 +17,10 @@ updates:
     labels:
       - dependencies
       - github-actions
+    # Routine bumps arrive as one PR; a major arrives alone, for review.
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
 
   # No `npm` entry: this repo ships a Claude-plugin bundle, not a Node package —
   # there is no package.json anywhere in the tree, so the npm updater failed every
