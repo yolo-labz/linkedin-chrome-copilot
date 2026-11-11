@@ -115,7 +115,14 @@ jobs:
 
   bats:
     name: bats-core test suite
-    runs-on: macos-14
+    # macos-15, not macos-14: GitHub retired every macOS 14 image from Actions on
+    # 2026-11-02 (actions/runner-images#15226). A retired label is refused at
+    # scheduling ("The configuration 'macos-14-arm64-us-default' is not
+    # supported") and this REQUIRED check reports `cancelled`, which blocks every
+    # PR without a single step running. Pinned rather than `macos-latest` so the
+    # image only moves in a reviewed diff; when macos-15 is announced for
+    # retirement, bump this line before the cut-off date.
+    runs-on: macos-15
     permissions:
       contents: read
     timeout-minutes: 15
