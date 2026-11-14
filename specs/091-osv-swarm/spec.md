@@ -9,7 +9,7 @@ Inventory: No supported package sources found by the actual scanner; explicitly 
 
 ## Plan
 
-Change only security workflows and their regression documentation/tests. No application, README, media, visibility, secrets, branch-protection, merge or deployment changes. OpenAI GPT-6 Astra implementation; independent full GLM review and workflow approval belong to the coordinator.
+Change only security workflows and their regression documentation/tests. No application, README, media, visibility, secrets, branch-protection, merge or deployment changes. Independent review and workflow approval belong to the coordinator.
 
 ## Tasks and verification
 
