@@ -26,11 +26,11 @@ Per-locale profile-edit forms, message-triage routing, profile audit. Plain mark
 
 ## Capability
 
-**Pattern.** LinkedIn copilot plugin for Claude Code that delegates every Chrome I/O call to [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) — a single Patchright surface owns the browser; five single-purpose skills (`resume`, `draft-reply`, `book-slot`, `tailor-cv`, `guardrails`) compose into the copilot. <!-- stealth-allow: skill names -->
+**Pattern.** LinkedIn copilot plugin for Claude Code that delegates every Chrome I/O call to [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome), a single Patchright surface owns the browser; five single-purpose skills (`resume`, `draft-reply`, `book-slot`, `tailor-cv`, `guardrails`) compose into the copilot. <!-- stealth-allow: skill names -->
 
 **Trade-off.** macOS-only (AppleScript-bound sibling plugin) and operator-paste-only message sends (ban-risk resistance on a watched account), in exchange for one shared Chrome session, channel-aware register selection, and a hard PII-scan CI gate over every committed file.
 
-**Use when.** An agent needs to replay session state, draft channel-aware replies, propose timezone-labeled calendar slots, build a document variant against a target keyword set, or evaluate a candidate action against the YAML policy — without auto-submitting on the LinkedIn surface.
+**Use when.** An agent needs to replay session state, draft channel-aware replies, propose timezone-labeled calendar slots, build a document variant against a target keyword set, or evaluate a candidate action against the YAML policy, without auto-submitting on the LinkedIn surface.
 
 ```bash
 brew install yolo-labz/tap/linkedin-chrome-copilot
@@ -49,7 +49,7 @@ open docs/assets/lc-workflow.svg
 rsvg-convert -w 1200 docs/assets/lc-workflow.svg -o /tmp/lc-workflow.png
 ```
 
-The dark variant lives at [`docs/assets/lc-workflow.svg`](./docs/assets/lc-workflow.svg); the light (Latte) variant at [`docs/assets/lc-workflow-light.svg`](./docs/assets/lc-workflow-light.svg). Every node and edge is a static vector — no animations, no gradients, no LinkedIn logo (trademark).
+The dark variant lives at [`docs/assets/lc-workflow.svg`](./docs/assets/lc-workflow.svg); the light (Latte) variant at [`docs/assets/lc-workflow-light.svg`](./docs/assets/lc-workflow-light.svg). Every node and edge is a static vector, no animations, no gradients, no LinkedIn logo (trademark).
 
 ## How `linkedin-chrome-copilot` compares
 
@@ -58,25 +58,25 @@ Closest peers in the LinkedIn-automation space:
 | Capability                                                  | `linkedin-chrome-copilot` (this repo) | [Phantombuster](https://phantombuster.com) | manual operation |
 |-------------------------------------------------------------|:---:|:---:|:---:|
 | PII-scan CI hard gate (`tools/pii-scan.sh`)                 | yes | no  | n/a |
-| Operator-paste-only message sends (ban-risk resistance)     | yes | no — auto-sends | yes |
-| Chrome delegation to a single Patchright surface            | yes | no — cloud      | yes (operator browser) |
+| Operator-paste-only message sends (ban-risk resistance)     | yes | no, auto-sends | yes |
+| Chrome delegation to a single Patchright surface            | yes | no, cloud      | yes (operator browser) |
 | JSON Schema draft-07 fixture validation in CI               | yes | no  | no  |
 | Conventional Commits + DCO sign-off + Co-Author trailer     | yes | n/a | n/a |
-| Multi-channel register policy (LinkedIn / email / WhatsApp / GitHub) | yes — `config/guardrails.yaml` | LinkedIn only | manual |
-| Plain-markdown save-state (no SaaS lock-in)                 | yes | no — cloud DB   | n/a |
+| Multi-channel register policy (LinkedIn / email / WhatsApp / GitHub) | yes, `config/guardrails.yaml` | LinkedIn only | manual |
+| Plain-markdown save-state (no SaaS lock-in)                 | yes | no, cloud DB   | n/a |
 | Locale-variant sync across EN / PT / ES profile forms       | yes | no  | manual |
 
-The shape of the problem here is a single-operator Claude Code copilot that the operator pastes into a live Chrome session — not a bulk-outreach SaaS. If a fully autonomous outreach engine is what you want, the alternatives above are a closer fit.
+The shape of the problem here is a single-operator Claude Code copilot that the operator pastes into a live Chrome session, not a bulk-outreach SaaS. If a fully autonomous outreach engine is what you want, the alternatives above are a closer fit.
 
 ## Capabilities
 
-- **Per-locale profile edits** — drives `/details/experience/edit/forms/<id>/?language=<lang>&country=<cc>` saves across PT/EN/ES locale slots via `execCommand('insertText')` + Save-button event-chain click.
-- **Message triage** — channel-aware drafting (LinkedIn DM tone ≠ email tone ≠ WhatsApp tone) gated through guardrails policy.
-- **Send verification** — re-reads DOM after every send; never silently promotes `pending` to `sent`.
-- **Calendar slot booking** — free-window check against guardrails policy + explicit timezone labels on every output.
-- **Document tailoring** — keyword-coverage reports + dated filename convention for per-target document variants.
-- **Locale-variant sync** — propagates profile edits across EN + PT + ES slots with diff verification.
-- **Workflow guardrails** — deep-work block guard, async-preference enforcement, quarterly reset injection at quarter boundaries.
+- **Per-locale profile edits**: drives `/details/experience/edit/forms/<id>/?language=<lang>&country=<cc>` saves across PT/EN/ES locale slots via `execCommand('insertText')` + Save-button event-chain click.
+- **Message triage**: channel-aware drafting (LinkedIn DM tone ≠ email tone ≠ WhatsApp tone) gated through guardrails policy.
+- **Send verification**: re-reads DOM after every send; never silently promotes `pending` to `sent`.
+- **Calendar slot booking**: free-window check against guardrails policy + explicit timezone labels on every output.
+- **Document tailoring**: keyword-coverage reports + dated filename convention for per-target document variants.
+- **Locale-variant sync**: propagates profile edits across EN + PT + ES slots with diff verification.
+- **Workflow guardrails**: deep-work block guard, async-preference enforcement, quarterly reset injection at quarter boundaries.
 
 ## Platform support
 
@@ -101,7 +101,7 @@ claude plugins install ~/code/linkedin-chrome-copilot
 
 See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the 8-step operator flow. First-run target: resume a session against fixture data in under 10 minutes.
 
-## Privacy — no PII in fixtures (hard rule)
+## Privacy, no PII in fixtures (hard rule)
 
 All fixtures committed to this repo are **100% synthetic**. Real contact data lives in a local-only alias map at `~/.config/linkedin-copilot/aliases.json` (chmod 600, gitignored, never leaves your machine). Every PR runs `tools/pii-scan.sh` against committed files; any hit on email / phone / Calendly URL / common-name blocklist fails the build.
 
@@ -113,8 +113,8 @@ Skills are single-purpose shell scripts; agents are prompt files that orchestrat
 
 ## Sibling plugins
 
-- [yolo-labz/claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) — required dependency. Drives Chrome via AppleScript JS-injection + cliclick.
-- [yolo-labz/wa](https://github.com/yolo-labz/wa) — WhatsApp daemon. Composes with this plugin for cross-channel automation in one save-state.
+- [yolo-labz/claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome), required dependency. Drives Chrome via AppleScript JS-injection + cliclick.
+- [yolo-labz/wa](https://github.com/yolo-labz/wa). WhatsApp daemon. Composes with this plugin for cross-channel automation in one save-state.
 
 ## License
 
